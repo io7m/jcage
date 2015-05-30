@@ -75,6 +75,15 @@ public final class SandboxBreaker implements SandboxBreakerType
     System.out.println("tryClassLoaderGetSystem: " + sys);
   }
 
+  @Override public void tryDisallowedClass()
+    throws Exception
+  {
+    System.out.println("tryDisallowedClass: starting");
+    final Class<? extends SandboxBreaker> c = this.getClass();
+    final ClassLoader cl = c.getClassLoader();
+    final Class<?> cm = cl.loadClass("java.util.concurrent.Future");
+  }
+
   @Override public void tryFileWrite()
     throws Exception
   {

@@ -6,18 +6,21 @@ import java.security.Permission;
 import java.security.Permissions;
 import java.security.SecurityPermission;
 import java.util.PropertyPermission;
+import java.util.regex.Pattern;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import com.io7m.jcage.core.JCClassLoaderPolicyType;
-import com.io7m.jcage.core.JCClassLoaderPolicyUnrestricted;
 import com.io7m.jcage.core.JCClassNameResolverClasspath;
+import com.io7m.jcage.core.JCRuleConclusion;
 import com.io7m.jcage.core.JCSandboxAdminPermission;
 import com.io7m.jcage.core.JCSandboxType;
 import com.io7m.jcage.core.JCSandboxes;
 import com.io7m.jcage.core.JCSandboxesType;
+import com.io7m.jcage.core.JCSequentialPolicy;
+import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
 
 @SuppressWarnings({ "null", "static-method", "unchecked" }) public final class JCSandboxEscapesTest
 {
@@ -45,6 +48,44 @@ import com.io7m.jcage.core.JCSandboxesType;
     throws AssertionError
   {
     try {
+      final JCSequentialPolicyBuilderType host_policy_builder =
+        JCSequentialPolicy.newPolicyBuilder(
+          JCRuleConclusion.DENY,
+          JCRuleConclusion.DENY);
+
+      host_policy_builder.addClassRule(
+        Pattern.compile("java\\.lang\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder.addClassRule(
+        Pattern.compile("java\\.io\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder.addClassRule(
+        Pattern.compile("java\\.util\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder.addClassRule(
+        Pattern.compile("com\\.io7m\\.jnull\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder.addClassRule(
+        Pattern.compile("com\\.io7m\\.jcage\\.core\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder.addClassRule(
+        Pattern.compile("java\\.security\\.([[\\p{Alnum}][_]]+)"),
+        JCRuleConclusion.ALLOW,
+        true);
+      host_policy_builder
+        .addClassRule(
+          Pattern
+            .compile("com\\.io7m\\.jcage\\.tests\\.core\\.([[\\p{Alnum}][_]]+)"),
+          JCRuleConclusion.ALLOW,
+          true);
+
+      final JCSequentialPolicy host_policy = host_policy_builder.build();
+
       final JCClassLoaderPolicyType sandbox_policy =
         new JCClassLoaderPolicyType() {
           @Override public boolean policyAllowsClass(
@@ -66,7 +107,7 @@ import com.io7m.jcage.core.JCSandboxesType;
         sb0.createSandbox(
           box_name,
           ClassLoader.getSystemClassLoader(),
-          JCClassLoaderPolicyUnrestricted.get(),
+          host_policy,
           JCClassNameResolverClasspath.get(),
           sandbox_policy,
           perms);
@@ -182,6 +223,17 @@ import com.io7m.jcage.core.JCSandboxesType;
 
     final SandboxBreakerType i = this.getSandboxBreaker("tryGetPolicy");
     i.tryGetPolicy();
+  }
+
+  @Test public void testDisallowedClass()
+    throws Exception
+  {
+    this.expected.expect(SecurityException.class);
+    this.expected
+      .expectMessage("Class access denied: java.util.concurrent.Future");
+
+    final SandboxBreakerType i = this.getSandboxBreaker("tryDisallowedClass");
+    i.tryDisallowedClass();
   }
 
   @Test public void testSandboxesCreate()

@@ -1,10 +1,10 @@
 /*
  * Copyright © 2015 <code@io7m.com> http://io7m.com
- * 
+ *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -37,6 +37,9 @@ public interface SandboxBreakerType
   void tryClassLoaderGetSystem()
     throws Exception;
 
+  void tryDisallowedClass()
+    throws Exception;
+
   void tryFileWrite()
     throws Exception;
 
@@ -44,6 +47,9 @@ public interface SandboxBreakerType
     throws Exception;
 
   void tryLoadNative()
+    throws Exception;
+
+  void tryReflectionGetDeclared()
     throws Exception;
 
   void trySandboxesCreate()
@@ -59,8 +65,5 @@ public interface SandboxBreakerType
     throws Exception;
 
   void tryThreadGroupCreate()
-    throws Exception;
-
-  void tryReflectionGetDeclared()
     throws Exception;
 }
