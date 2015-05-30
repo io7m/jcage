@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
+ * Copyright © 2014 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,25 +14,9 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jcage.core;
-
 /**
- * The type of sandbox exceptions.
+ * Documentation.
  */
 
-public abstract class JCSandboxException extends Exception
-{
-  private static final long serialVersionUID = 1L;
+@com.io7m.jnull.NonNullByDefault package com.io7m.jcage.documentation;
 
-  public JCSandboxException(
-    final String message)
-  {
-    super(message);
-  }
-
-  public JCSandboxException(
-    final Throwable e)
-  {
-    super(e);
-  }
-}

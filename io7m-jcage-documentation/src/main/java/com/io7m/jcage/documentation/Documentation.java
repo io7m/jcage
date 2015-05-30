@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
+ * Copyright © 2014 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,25 +14,30 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jcage.core;
+package com.io7m.jcage.documentation;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
- * The type of sandbox exceptions.
+ * Functions for retrieving the documentation.
  */
 
-public abstract class JCSandboxException extends Exception
+public final class Documentation
 {
-  private static final long serialVersionUID = 1L;
-
-  public JCSandboxException(
-    final String message)
+  public static URI getDocumentationXMLLocation()
   {
-    super(message);
-  }
-
-  public JCSandboxException(
-    final Throwable e)
-  {
-    super(e);
+    try {
+      final URL url =
+        Documentation.class
+          .getResource("/com/io7m/jcage/documentation/documentation.xml");
+      assert url != null;
+      final URI uri = url.toURI();
+      assert uri != null;
+      return uri;
+    } catch (final URISyntaxException e) {
+      throw new AssertionError(e);
+    }
   }
 }

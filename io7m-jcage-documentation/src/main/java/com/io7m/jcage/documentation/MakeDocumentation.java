@@ -1,10 +1,10 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
- *
+ * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * 
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
  * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
@@ -14,25 +14,16 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jcage.core;
+package com.io7m.jcage.documentation;
 
-/**
- * The type of sandbox exceptions.
- */
+import com.io7m.jstructural.tools.JSCMain;
 
-public abstract class JCSandboxException extends Exception
+final class MakeDocumentation
 {
-  private static final long serialVersionUID = 1L;
-
-  public JCSandboxException(
-    final String message)
+  public static void main(
+    final String[] args)
+    throws Throwable
   {
-    super(message);
-  }
-
-  public JCSandboxException(
-    final Throwable e)
-  {
-    super(e);
+    JSCMain.run(JSCMain.getLog(false), args);
   }
 }
