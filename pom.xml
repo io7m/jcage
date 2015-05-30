@@ -17,6 +17,7 @@
   <modules>
     <module>io7m-jcage-core</module>
     <module>io7m-jcage-documentation</module>
+    <module>io7m-jcage-examples</module>
   </modules>
 
   <properties>
