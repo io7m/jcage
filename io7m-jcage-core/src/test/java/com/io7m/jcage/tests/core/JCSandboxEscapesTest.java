@@ -49,7 +49,7 @@ import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
   {
     try {
       final JCSequentialPolicyBuilderType host_policy_builder =
-        JCSequentialPolicy.newPolicyBuilder(
+        JCSequentialPolicy.newEmptyPolicyBuilder(
           JCRuleConclusion.DENY,
           JCRuleConclusion.DENY);
 

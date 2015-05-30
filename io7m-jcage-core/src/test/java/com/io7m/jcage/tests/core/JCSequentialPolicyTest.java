@@ -30,7 +30,7 @@ import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
   @Test public void testPolicyEmpty_0()
   {
     final JCSequentialPolicyBuilderType jpb =
-      JCSequentialPolicy.newPolicyBuilder(
+      JCSequentialPolicy.newEmptyPolicyBuilder(
         JCRuleConclusion.DENY,
         JCRuleConclusion.DENY);
     final JCSequentialPolicy jp = jpb.build();
@@ -41,7 +41,7 @@ import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
   @Test public void testPolicy_0()
   {
     final JCSequentialPolicyBuilderType jpb =
-      JCSequentialPolicy.newPolicyBuilder(
+      JCSequentialPolicy.newEmptyPolicyBuilder(
         JCRuleConclusion.DENY,
         JCRuleConclusion.DENY);
 
@@ -60,7 +60,7 @@ import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
   @Test public void testPolicy_1()
   {
     final JCSequentialPolicyBuilderType jpb =
-      JCSequentialPolicy.newPolicyBuilder(
+      JCSequentialPolicy.newEmptyPolicyBuilder(
         JCRuleConclusion.DENY,
         JCRuleConclusion.DENY);
 
@@ -83,7 +83,7 @@ import com.io7m.jcage.core.JCSequentialPolicyBuilderType;
   @Test public void testPolicy_2()
   {
     final JCSequentialPolicyBuilderType jpb =
-      JCSequentialPolicy.newPolicyBuilder(
+      JCSequentialPolicy.newEmptyPolicyBuilder(
         JCRuleConclusion.DENY,
         JCRuleConclusion.DENY);
 

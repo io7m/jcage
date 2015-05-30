@@ -177,7 +177,7 @@ import com.io7m.junreachable.UnreachableCodeException;
    * @return A new policy builder
    */
 
-  public static JCSequentialPolicyBuilderType newPolicyBuilder(
+  public static JCSequentialPolicyBuilderType newEmptyPolicyBuilder(
     final JCRuleConclusion class_default,
     final JCRuleConclusion resource_default)
   {
