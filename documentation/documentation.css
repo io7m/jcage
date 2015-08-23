@@ -52,15 +52,8 @@
   font-size:     9pt;
 }
 
-.examples table td
+.st200_table td
 {
   padding-right: 2.0em;
   vertical-align: top;
 }
-
-.files table td
-{
-  padding-right: 2.0em;
-  vertical-align: top;
-}
-
