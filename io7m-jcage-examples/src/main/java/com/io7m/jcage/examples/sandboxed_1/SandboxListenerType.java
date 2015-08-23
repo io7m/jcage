@@ -16,8 +16,18 @@
 
 package com.io7m.jcage.examples.sandboxed_1;
 
+/**
+ * A listener that can return messages from a sandbox.
+ */
+
 public interface SandboxListenerType
 {
+  /**
+   * A message {@code m} was received.
+   *
+   * @param m The message
+   */
+
   void onMessageReceived(
     String m);
 }

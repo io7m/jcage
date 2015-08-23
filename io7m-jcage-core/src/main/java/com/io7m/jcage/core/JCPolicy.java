@@ -16,6 +16,10 @@
 
 package com.io7m.jcage.core;
 
+import com.io7m.jnull.NullCheck;
+import com.io7m.jnull.Nullable;
+import org.valid4j.Assertive;
+
 import java.net.URL;
 import java.security.AllPermission;
 import java.security.CodeSource;
@@ -29,22 +33,25 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.valid4j.Assertive;
-
-import com.io7m.jnull.NullCheck;
-import com.io7m.jnull.Nullable;
-
 /**
- * <p>
- * The main sandboxing {@link Policy} implementation.
- * </p>
- * <p>
- * The policy maps sandbox URLs to sets of {@link Permission} values.
- * </p>
+ * <p> The main sandboxing {@link Policy} implementation. </p> <p> The policy
+ * maps sandbox URLs to sets of {@link Permission} values. </p>
  */
 
 public final class JCPolicy extends Policy
 {
+  private final Map<URL, Permissions> sandboxes;
+  private       Permissions           permissions_default;
+
+  JCPolicy()
+  {
+    this.sandboxes = new ConcurrentHashMap<URL, Permissions>();
+    final Permissions q = new Permissions();
+    q.add(new AllPermission());
+    q.setReadOnly();
+    this.permissions_default = q;
+  }
+
   @Override public @Nullable Provider getProvider()
   {
     return null;
@@ -77,18 +84,6 @@ public final class JCPolicy extends Policy
     return null;
   }
 
-  private Permissions                 permissions_default;
-  private final Map<URL, Permissions> sandboxes;
-
-  JCPolicy()
-  {
-    this.sandboxes = new ConcurrentHashMap<URL, Permissions>();
-    final Permissions q = new Permissions();
-    q.add(new AllPermission());
-    q.setReadOnly();
-    this.permissions_default = q;
-  }
-
   @Override public boolean implies(
     final @Nullable ProtectionDomain in_domain,
     final @Nullable Permission in_permission)
@@ -108,8 +103,7 @@ public final class JCPolicy extends Policy
   /**
    * Set the default (non-sandboxed) permissions.
    *
-   * @param p
-   *          The permissions
+   * @param p The permissions
    */
 
   public void setDefaultPermissions(
@@ -136,8 +130,8 @@ public final class JCPolicy extends Policy
   /**
    * Set the permissions for the given sandbox.
    *
-   * @param p
-   *          The permissions
+   * @param name The sandbox name
+   * @param p    The permissions
    */
 
   public void putSandboxPermissions(

@@ -16,13 +16,21 @@
 
 package com.io7m.jcage.examples.sandboxed_0;
 
+import com.io7m.junreachable.UnreachableCodeException;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import com.io7m.junreachable.UnreachableCodeException;
+/**
+ * Some sandboxed code.
+ */
 
 public final class Sandboxed implements Runnable
 {
+  /**
+   * Primary constructor.
+   */
+
   public Sandboxed()
   {
 
@@ -33,12 +41,12 @@ public final class Sandboxed implements Runnable
     System.out.println("Sandboxed: running sandboxed");
 
     try {
-      System.out
-        .println("Sandboxed: attempting to open file.txt (should fail)");
+      System.out.println("Sandboxed: attempting to open file.txt (should "
+                         + "fail)");
       new FileOutputStream("file.txt");
     } catch (final SecurityException e) {
-      System.out.println("Sandboxed: failed to open file.txt as expected: "
-        + e.getMessage());
+      System.out.println(
+        "Sandboxed: failed to open file.txt as expected: " + e.getMessage());
     } catch (final FileNotFoundException e) {
       throw new UnreachableCodeException(e);
     }

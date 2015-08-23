@@ -24,6 +24,12 @@ public final class JCSandboxDuplicateException extends JCSandboxException
 {
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Construct an exception.
+   *
+   * @param message The message
+   */
+
   public JCSandboxDuplicateException(
     final String message)
   {

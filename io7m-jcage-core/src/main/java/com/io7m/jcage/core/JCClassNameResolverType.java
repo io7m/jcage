@@ -19,13 +19,18 @@ package com.io7m.jcage.core;
 import com.io7m.jnull.Nullable;
 
 /**
- * <p>
- * A mapping from class names to bytes.
- * </p>
+ * <p> A mapping from class names to bytes. </p>
  */
 
 public interface JCClassNameResolverType
 {
+  /**
+   * @param name The class name
+   *
+   * @return The class as a series of bytes, or {@code null} if it cannot be
+   * found.
+   */
+
   @Nullable byte[] resolveToBytes(
     String name);
 }

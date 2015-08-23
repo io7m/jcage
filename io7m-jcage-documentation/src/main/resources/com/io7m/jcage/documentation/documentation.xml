@@ -109,6 +109,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.]]>
     </s:section>
   </s:part>
 
+  <xi:include href="dai.xml" parse="xml"/>
+  <xi:include href="usage.xml" parse="xml"/>
+
   <s:part>
     <s:part-title>API Reference</s:part-title>
     <s:part-contents/>

@@ -8,68 +8,20 @@
   <parent>
     <groupId>com.io7m.jcage</groupId>
     <artifactId>io7m-jcage</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>io7m-jcage-core</artifactId>
 
   <packaging>jar</packaging>
   <description>Run-time configurable JVM sandboxing (Core)</description>
-  <url>http://mvn.io7m.com/${project.artifactId}/</url>
+  <url>http://io7m.github.io/jcage</url>
   <name>${project.artifactId}</name>
 
-  <licenses>
-    <license>
-      <name>ISC License</name>
-      <url>http://www.opensource.org/licenses/isc-license.txt</url>
-    </license>
-  </licenses>
-
   <scm>
-    <url>http://fossil.io7m.com/repo.cgi/io7m-jcage</url>
-    <connection>scm:http://fossil.io7m.com/repo.cgi/io7m-jcage</connection>
-    <developerConnection>scm:http://fossil.io7m.com/repo.cgi/io7m-jcage</developerConnection>
+    <url>${project.parent.scm.url}</url>
+    <connection>${project.parent.scm.connection}</connection>
+    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
   </scm>
-
-  <developers>
-    <developer>
-      <id>io7m</id>
-      <name>io7m</name>
-      <email>code@io7m.com</email>
-      <url>http://io7m.com</url>
-    </developer>
-  </developers>
-
-  <issueManagement>
-    <url>http://fossil.io7m.com/repo.cgi/io7m-jcage</url>
-    <system>Fossil</system>
-  </issueManagement>
-
-  <distributionManagement>
-    <site>
-      <id>io7m</id>
-      <name>io7m.com</name>
-      <url>${project.url}</url>
-    </site>
-  </distributionManagement>
-
-  <mailingLists>
-    <mailingList>
-      <name>io7m-jcage</name>
-      <subscribe>io7m-jcage-join@lists.io7m.com</subscribe>
-      <unsubscribe>io7m-jcage-leave@lists.io7m.com</unsubscribe>
-      <post>io7m-jcage@lists.io7m.com</post>
-      <archive>http://lists.io7m.com/io7m-jcage/archive</archive>
-    </mailingList>
-  </mailingLists>
-
-  <prerequisites>
-    <maven>2.2.1</maven>
-  </prerequisites>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -121,74 +73,51 @@
     </dependency>
   </dependencies>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.7</version>
-        <configuration>
-          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.3</version>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <build>
     <plugins>
-      <!-- Plugin versions -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>2.5</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.7</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>2.4</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.6</version>
-      </plugin>
-
-      <!-- Require JDK >= 1.7 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-
       <!-- Redirect test output -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.15</version>
+        <version>2.18.1</version>
         <configuration>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
         </configuration>
+      </plugin>
+
+      <!-- Check style -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>io7m-jcage-checkstyle</artifactId>
+            <version>${project.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>validate</id>
+            <phase>validate</phase>
+            <configuration>
+              <configLocation>com/io7m/jcage/checkstyle/checkstyle.xml
+              </configLocation>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
       <!-- Produce custom manifest in jar files -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -204,21 +133,12 @@
             </manifestEntries>
           </archive>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-              <goal>test-jar</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
 
       <!-- Create source jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -248,7 +168,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -274,91 +193,7 @@
           </execution>
         </executions>
       </plugin>
-
-      <!-- Enable code coverage for unit tests -->
-      <plugin>
-        <groupId>org.sonatype.maven.plugin</groupId>
-        <artifactId>emma-maven-plugin</artifactId>
-        <version>1.2</version>
-        <executions>
-          <execution>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>instrument</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
-
-    <!-- Allow deployment over ssh -->
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh-external</artifactId>
-        <version>2.2</version>
-      </extension>
-    </extensions>
-
-    <!-- Mark plugins as ignored in Eclipse, does not affect the build. -->
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.eclipse.m2e</groupId>
-          <artifactId>lifecycle-mapping</artifactId>
-          <version>1.0.0</version>
-          <configuration>
-            <lifecycleMappingMetadata>
-              <pluginExecutions>
-                <pluginExecution>
-                  <pluginExecutionFilter>
-                    <groupId>org.sonatype.maven.plugin</groupId>
-                    <artifactId>emma-maven-plugin</artifactId>
-                    <versionRange>[1.2,)</versionRange>
-                    <goals>
-                      <goal>instrument</goal>
-                    </goals>
-                  </pluginExecutionFilter>
-                  <action>
-                    <ignore></ignore>
-                  </action>
-                </pluginExecution>
-              </pluginExecutions>
-            </lifecycleMappingMetadata>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
-
-  <!-- Sign artifacts when deploying to io7m -->
-  <profiles>
-    <profile>
-      <id>io7m-deployment-private</id>
-      <activation>
-        <property>
-          <name>io7m.deployment</name>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.4</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 </project>

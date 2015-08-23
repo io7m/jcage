@@ -18,7 +18,6 @@ package com.io7m.jcage.core;
 
 import java.net.URL;
 import java.security.Permissions;
-import java.security.Policy;
 
 /**
  * The type of sandboxes.
@@ -33,22 +32,27 @@ public interface JCSandboxType
   JCClassLoader getSandboxClassLoader();
 
   /**
-   * Return a class that is guaranteed to have been loaded by the sandbox
-   * class loader.
+   * Return a class that is guaranteed to have been loaded by the sandbox class
+   * loader.
    *
-   * @param name
-   *          The name of the class
+   * @param name The name of the class
+   *
    * @return A loaded class
-   * @throws JCSandboxClassWrongLoaderException
-   *           If the given class was loaded by a class loader other than that
-   *           created for the sandbox
-   * @throws JCSandboxClassMissingException
-   *           If the given class does not exist
+   *
+   * @throws JCSandboxClassWrongLoaderException If the given class was loaded by
+   *                                            a class loader other than that
+   *                                            created for the sandbox
+   * @throws JCSandboxClassMissingException     If the given class does not
+   *                                            exist
+   * @throws JCSandboxException                 On other errors
    */
 
   Class<?> getSandboxLoadedClass(
     String name)
-    throws JCSandboxException;
+    throws
+    JCSandboxException,
+    JCSandboxClassWrongLoaderException,
+    JCSandboxClassMissingException;
 
   /**
    * @return The short name of the sandbox
@@ -64,8 +68,8 @@ public interface JCSandboxType
 
   /**
    * Get the identifying URL of the sandbox. This URL uniquely identifies the
-   * sandbox for the purposes of assigning permissions in Java {@link Policy}
-   * implementations.
+   * sandbox for the purposes of assigning permissions in Java {@link
+   * java.security.Policy} implementations.
    *
    * @return The identifying URL of the sandbox
    */

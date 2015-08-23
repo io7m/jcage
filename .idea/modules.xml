@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/io7m-jcage.iml" filepath="$PROJECT_DIR$/io7m-jcage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io7m-jcage-checkstyle/io7m-jcage-checkstyle.iml" filepath="$PROJECT_DIR$/io7m-jcage-checkstyle/io7m-jcage-checkstyle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io7m-jcage-core/io7m-jcage-core.iml" filepath="$PROJECT_DIR$/io7m-jcage-core/io7m-jcage-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io7m-jcage-documentation/io7m-jcage-documentation.iml" filepath="$PROJECT_DIR$/io7m-jcage-documentation/io7m-jcage-documentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/io7m-jcage-examples/io7m-jcage-examples.iml" filepath="$PROJECT_DIR$/io7m-jcage-examples/io7m-jcage-examples.iml" />
+    </modules>
+  </component>
+</project>

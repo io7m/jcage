@@ -16,10 +16,10 @@
 
 package com.io7m.jcage.core;
 
-import java.security.Permission;
-
 import com.io7m.jnull.NullCheck;
 import com.io7m.jnull.Nullable;
+
+import java.security.Permission;
 
 /**
  * Permissions required to administer the sandbox system.
@@ -27,6 +27,26 @@ import com.io7m.jnull.Nullable;
 
 public final class JCSandboxAdminPermission extends Permission
 {
+  private static final long serialVersionUID = 1L;
+  private final String name;
+  private final String actions;
+
+  /**
+   * Construct a permission.
+   *
+   * @param in_name    The permission name
+   * @param in_actions The permitted actions
+   */
+
+  public JCSandboxAdminPermission(
+    final String in_name,
+    final String in_actions)
+  {
+    super(in_name);
+    this.name = NullCheck.notNull(in_name);
+    this.actions = NullCheck.notNull(in_actions);
+  }
+
   @Override public int hashCode()
   {
     final int prime = 31;
@@ -64,15 +84,15 @@ public final class JCSandboxAdminPermission extends Permission
       final String other_name = jp.getName();
       final String other_act = jp.getActions();
 
-      if (this_name.equals("*")) {
-        if (this_act.equals("*")) {
+      if ("*".equals(this_name)) {
+        if ("*".equals(this_act)) {
           return true;
         }
         return this_act.equals(other_act);
       }
 
       if (this_name.equals(other_name)) {
-        if (this_act.equals("*")) {
+        if ("*".equals(this_act)) {
           return true;
         }
         return this_act.equals(other_act);
@@ -80,20 +100,6 @@ public final class JCSandboxAdminPermission extends Permission
     }
 
     return false;
-  }
-
-  private static final long serialVersionUID = 1L;
-
-  private final String      name;
-  private final String      actions;
-
-  public JCSandboxAdminPermission(
-    final String in_name,
-    final String in_actions)
-  {
-    super(in_name);
-    this.name = NullCheck.notNull(in_name);
-    this.actions = NullCheck.notNull(in_actions);
   }
 
   @Override public String getActions()

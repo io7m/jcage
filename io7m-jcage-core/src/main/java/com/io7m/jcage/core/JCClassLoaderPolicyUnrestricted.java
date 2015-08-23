@@ -22,8 +22,8 @@ import com.io7m.jnull.NullCheck;
  * A class loader policy that allows everything.
  */
 
-public final class JCClassLoaderPolicyUnrestricted implements
-  JCClassLoaderPolicyType
+public final class JCClassLoaderPolicyUnrestricted
+  implements JCClassLoaderPolicyType
 {
   private static final JCClassLoaderPolicyUnrestricted POLICY;
 
@@ -31,14 +31,18 @@ public final class JCClassLoaderPolicyUnrestricted implements
     POLICY = new JCClassLoaderPolicyUnrestricted();
   }
 
-  public static JCClassLoaderPolicyType get()
-  {
-    return JCClassLoaderPolicyUnrestricted.POLICY;
-  }
-
   private JCClassLoaderPolicyUnrestricted()
   {
 
+  }
+
+  /**
+   * @return A class loader policy that allows everything.
+   */
+
+  public static JCClassLoaderPolicyType get()
+  {
+    return JCClassLoaderPolicyUnrestricted.POLICY;
   }
 
   @Override public boolean policyAllowsClass(

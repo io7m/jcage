@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document
+  xmlns="http://maven.apache.org/XDOC/2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>io7m-jcage</title>
+  </properties>
+
+  <body>
+    <subsection name="jcage">
+      <p>
+        The <b>jcage</b> package implements a run-time configurable
+        sandbox using the JVM's security components.
+      </p>
+    </subsection>
+    <subsection name="Features">
+      <ul>
+        <li>Simple, verifiable sandboxing: Tiny trusted code base using nothing beyond the standard JVM security components to enforce a security policy.</li>
+        <li>Documentation!</li>
+        <li>Full unit test coverage.</li>
+        <li>ISC license.</li>
+      </ul>
+    </subsection>
+  </body>
+
+</document>

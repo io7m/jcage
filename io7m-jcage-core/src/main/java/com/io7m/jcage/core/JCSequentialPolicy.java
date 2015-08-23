@@ -16,16 +16,15 @@
 
 package com.io7m.jcage.core;
 
+import com.io7m.jnull.NullCheck;
+import com.io7m.junreachable.UnreachableCodeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.io7m.jnull.NullCheck;
-import com.io7m.junreachable.UnreachableCodeException;
 
 /**
  * <p>
@@ -102,9 +101,9 @@ import com.io7m.junreachable.UnreachableCodeException;
 
   private static final class Rule
   {
-    final JCRuleConclusion conclusion;
-    final Pattern          pattern;
-    final boolean          quick;
+    private final JCRuleConclusion conclusion;
+    private final Pattern pattern;
+    private final boolean quick;
 
     Rule(
       final Pattern in_pattern,
@@ -127,8 +126,7 @@ import com.io7m.junreachable.UnreachableCodeException;
   private static final Logger LOG;
 
   static {
-    LOG =
-      NullCheck.notNull(LoggerFactory.getLogger(JCSequentialPolicy.class));
+    LOG = NullCheck.notNull(LoggerFactory.getLogger(JCSequentialPolicy.class));
   }
 
   private static JCRuleConclusion checkRules(
@@ -206,12 +204,8 @@ import com.io7m.junreachable.UnreachableCodeException;
   {
     NullCheck.notNull(name);
 
-    final JCRuleConclusion current_conclusion =
-      JCSequentialPolicy.checkRules(
-        "class",
-        name,
-        this.class_default,
-        this.class_rules);
+    final JCRuleConclusion current_conclusion = JCSequentialPolicy.checkRules(
+      "class", name, this.class_default, this.class_rules);
 
     switch (current_conclusion) {
       case ALLOW:
@@ -228,12 +222,8 @@ import com.io7m.junreachable.UnreachableCodeException;
   {
     NullCheck.notNull(name);
 
-    final JCRuleConclusion current_conclusion =
-      JCSequentialPolicy.checkRules(
-        "resource",
-        name,
-        this.resource_default,
-        this.resource_rules);
+    final JCRuleConclusion current_conclusion = JCSequentialPolicy.checkRules(
+      "resource", name, this.resource_default, this.resource_rules);
 
     switch (current_conclusion) {
       case ALLOW:

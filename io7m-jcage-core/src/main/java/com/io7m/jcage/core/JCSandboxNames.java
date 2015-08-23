@@ -16,23 +16,17 @@
 
 package com.io7m.jcage.core;
 
-import java.net.URL;
+import com.io7m.jnull.NullCheck;
+import com.io7m.junreachable.UnreachableCodeException;
+import org.valid4j.Assertive;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.valid4j.Assertive;
-
-import com.io7m.jnull.NullCheck;
-import com.io7m.junreachable.UnreachableCodeException;
-
 /**
- * <p>
- * Functions to validate sandbox names.
- * </p>
- * <p>
- * The format of sandbox names are restricted in order to ensure that they can
- * always be used safely inside {@link URL} values.
- * </p>
+ * <p> Functions to validate sandbox names. </p> <p> The format of sandbox names
+ * are restricted in order to ensure that they can always be used safely inside
+ * {@link java.net.URL} values. </p>
  */
 
 public final class JCSandboxNames
@@ -42,18 +36,22 @@ public final class JCSandboxNames
 
   static {
     PATTERN_TEXT = "[[\\p{Alnum}][_]]{1,}";
-    PATTERN =
-      NullCheck.notNull(Pattern.compile(
-        JCSandboxNames.PATTERN_TEXT,
-        Pattern.UNICODE_CHARACTER_CLASS));
+    PATTERN = NullCheck.notNull(
+      Pattern.compile(
+        JCSandboxNames.PATTERN_TEXT, Pattern.UNICODE_CHARACTER_CLASS));
+  }
+
+  private JCSandboxNames()
+  {
+    throw new UnreachableCodeException();
   }
 
   /**
-   * Check if <tt>name</tt> is valid with respect to
-   * {@link #nameIsValid(String)}.
+   * Check if <tt>name</tt> is valid with respect to {@link
+   * #nameIsValid(String)}.
    *
-   * @param name
-   *          The name
+   * @param name The name
+   *
    * @return The name
    */
 
@@ -70,8 +68,8 @@ public final class JCSandboxNames
   }
 
   /**
-   * @param name
-   *          The requested sandbox name
+   * @param name The requested sandbox name
+   *
    * @return <tt>true</tt> is a valid sandbox name
    */
 
@@ -82,10 +80,5 @@ public final class JCSandboxNames
 
     final Matcher matcher = JCSandboxNames.PATTERN.matcher(name);
     return matcher.matches();
-  }
-
-  private JCSandboxNames()
-  {
-    throw new UnreachableCodeException();
   }
 }

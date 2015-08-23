@@ -16,6 +16,9 @@
 
 package com.io7m.jcage.core;
 
+import com.io7m.jnull.NullCheck;
+import com.io7m.jnull.Nullable;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,15 +30,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import com.io7m.jnull.NullCheck;
-import com.io7m.jnull.Nullable;
-
 /**
  * A class resolver that can load class data from a list of URLs.
  */
 
 public final class JCClassNameResolverURLs implements JCClassNameResolverType
 {
+  private final List<URL> urls;
+
+  private JCClassNameResolverURLs(
+    final List<URL> in_urls)
+  {
+    this.urls = NullCheck.notNullAll(in_urls, "URLs");
+  }
+
+  /**
+   * @param urls A list of URLs
+   *
+   * @return A class resolver that can load class data from the given URLs.
+   */
+
   public static JCClassNameResolverType get(
     final List<URL> urls)
   {
@@ -51,7 +65,7 @@ public final class JCClassNameResolverURLs implements JCClassNameResolverType
     final ByteArrayOutputStream bao = new ByteArrayOutputStream(4096);
     try (final InputStream stream = new FileInputStream(actual)) {
       final byte[] buffer = new byte[4096];
-      for (;;) {
+      while (true) {
         final int r = stream.read(buffer);
         if (r == -1) {
           break;
@@ -73,15 +87,14 @@ public final class JCClassNameResolverURLs implements JCClassNameResolverType
     final URL u)
   {
     try {
-      final String s =
-        NullCheck.notNull(String.format("jar:%s!/%s", u, path));
+      final String s = NullCheck.notNull(String.format("jar:%s!/%s", u, path));
       final URL ju = new URL(s);
       final JarURLConnection c = (JarURLConnection) ju.openConnection();
 
       final ByteArrayOutputStream bao = new ByteArrayOutputStream(4096);
       try (final InputStream stream = c.getInputStream()) {
         final byte[] buffer = new byte[4096];
-        for (;;) {
+        while (true) {
           final int r = stream.read(buffer);
           if (r == -1) {
             break;
@@ -98,14 +111,6 @@ public final class JCClassNameResolverURLs implements JCClassNameResolverType
     }
 
     return null;
-  }
-
-  private final List<URL> urls;
-
-  private JCClassNameResolverURLs(
-    final List<URL> in_urls)
-  {
-    this.urls = NullCheck.notNullAll(in_urls, "URLs");
   }
 
   @Override public @Nullable byte[] resolveToBytes(

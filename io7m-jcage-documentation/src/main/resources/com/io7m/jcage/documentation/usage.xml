@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright © 2015 <code@io7m.com> http://io7m.com
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted, provided that the above
+  copyright notice and this permission notice appear in all copies.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+  -->
+
+<s:part
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <s:part-title>Usage</s:part-title>
+  <s:part-contents/>
+
+  <s:section xml:id="ex">
+    <s:section-title>Examples</s:section-title>
+    <s:section-contents/>
+
+    <s:formal-item s:kind="files" s:type="examples">
+      <s:formal-item-title>Examples</s:formal-item-title>
+      <s:table>
+        <s:table-summary>Examples</s:table-summary>
+        <s:table-head>
+          <s:table-column-name>Name</s:table-column-name>
+          <s:table-column-name>Description</s:table-column-name>
+        </s:table-head>
+        <s:table-body>
+          <s:table-row>
+            <s:table-cell><s:link-external s:target="com/io7m/jcage/examples/sandboxed_0/Sandboxed.java">sandboxed_0/Sandboxed.java</s:link-external></s:table-cell>
+            <s:table-cell>A sandboxed class that demonstrates an inability to performed privileged operations.</s:table-cell>
+          </s:table-row>
+          <s:table-row>
+            <s:table-cell><s:link-external s:target="com/io7m/jcage/examples/sandboxed_0/SandboxerMain.java">sandboxed_0/SandboxerMain.java</s:link-external></s:table-cell>
+            <s:table-cell>The creation of a sandbox.</s:table-cell>
+          </s:table-row>
+          <s:table-row>
+            <s:table-cell><s:link-external s:target="com/io7m/jcage/examples/sandboxed_1/Sandboxed.java">sandboxed_1/Sandboxed.java</s:link-external></s:table-cell>
+            <s:table-cell>A sandboxed class that demonstrates an inability to performed privileged operations, but can call a host-provided API to perform privileged operations.</s:table-cell>
+          </s:table-row>
+          <s:table-row>
+            <s:table-cell><s:link-external s:target="com/io7m/jcage/examples/sandboxed_1/SandboxerMain.java">sandboxed_1/SandboxerMain.java</s:link-external></s:table-cell>
+            <s:table-cell>The creation of a sandbox that allows selective privileged operations.</s:table-cell>
+          </s:table-row>
+        </s:table-body>
+      </s:table>
+    </s:formal-item>
+
+  </s:section>
+</s:part>

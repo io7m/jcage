@@ -25,31 +25,24 @@ import java.security.Permissions;
 public interface JCSandboxesType
 {
   /**
-   * <p>
    * Create a new sandbox.
-   * </p>
-   * 
-   * @param name
-   *          The name of the sandbox (must be valid, see @link
-   *          {@link JCSandboxNames}).
-   * @param sandbox_host_classloader
-   *          The class loader used to load classes on the host (outside of
-   *          the sandbox)
-   * @param sandbox_host_class_policy
-   *          The policy that controls access to classes outside of the
-   *          sandbox
-   * @param class_resolver
-   *          The class name resolver
-   * @param sandbox_class_policy
-   *          The policy that controls which classes will be loaded using the
-   *          sandbox class loader
-   * @param p
-   *          The permissions assigned to the sandbox
+   *
+   * @param name                      The name of the sandbox (must be valid,
+   *                                  see @link {@link JCSandboxNames}).
+   * @param sandbox_host_classloader  The class loader used to load classes on
+   *                                  the host (outside of the sandbox)
+   * @param sandbox_host_class_policy The policy that controls access to classes
+   *                                  outside of the sandbox
+   * @param class_resolver            The class name resolver
+   * @param sandbox_class_policy      The policy that controls which classes
+   *                                  will be loaded using the sandbox class
+   *                                  loader
+   * @param p                         The permissions assigned to the sandbox
+   *
    * @return A new sandbox
-   * @throws JCSandboxDuplicateException
-   *           If the sandbox already exists
-   * @throws JCSandboxException
-   *           On other sandbox errors
+   *
+   * @throws JCSandboxDuplicateException If the sandbox already exists
+   * @throws JCSandboxException          On other sandbox errors
    */
 
   JCSandboxType createSandbox(
@@ -59,5 +52,5 @@ public interface JCSandboxesType
     JCClassNameResolverType class_resolver,
     JCClassLoaderPolicyType sandbox_class_policy,
     Permissions p)
-    throws JCSandboxException;
+    throws JCSandboxException, JCSandboxDuplicateException;
 }

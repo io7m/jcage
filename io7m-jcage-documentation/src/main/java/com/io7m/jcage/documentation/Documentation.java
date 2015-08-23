@@ -26,12 +26,20 @@ import java.net.URL;
 
 public final class Documentation
 {
+  private Documentation()
+  {
+    throw new AssertionError("Unreachable code!");
+  }
+
+  /**
+   * @return The resource URL of the documentation
+   */
+
   public static URI getDocumentationXMLLocation()
   {
     try {
-      final URL url =
-        Documentation.class
-          .getResource("/com/io7m/jcage/documentation/documentation.xml");
+      final URL url = Documentation.class.getResource(
+        "/com/io7m/jcage/documentation/documentation.xml");
       assert url != null;
       final URI uri = url.toURI();
       assert uri != null;

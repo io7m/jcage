@@ -24,6 +24,12 @@ public final class JCSandboxClassMissingException extends JCSandboxException
 {
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Construct an exception.
+   *
+   * @param e The cause
+   */
+
   public JCSandboxClassMissingException(
     final ClassNotFoundException e)
   {

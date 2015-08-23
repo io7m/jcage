@@ -28,7 +28,8 @@
 .file,
 .function,
 .keyword,
-.type
+.type,
+.variable
 {
   font-family: monospace;
 }
@@ -51,13 +52,9 @@
   font-size:     9pt;
 }
 
-.platforms table td
+.examples table td
 {
   padding-right: 2.0em;
+  vertical-align: top;
 }
-.platforms table tbody,
-.platforms table thead
-{
-  font-size:     8pt;
-  font-family:   monospace;
-}
+

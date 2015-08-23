@@ -16,6 +16,9 @@
 
 package com.io7m.jcage.core;
 
+import com.io7m.jnull.NullCheck;
+import com.io7m.jnull.Nullable;
+
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,16 +26,26 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.io7m.jnull.NullCheck;
-import com.io7m.jnull.Nullable;
-
 /**
  * A class resolver that can load class data from the current classpath.
  */
 
-public final class JCClassNameResolverClasspath implements
-  JCClassNameResolverType
+public final class JCClassNameResolverClasspath
+  implements JCClassNameResolverType
 {
+  private final JCClassNameResolverType actual;
+
+  private JCClassNameResolverClasspath(
+    final JCClassNameResolverType in_actual)
+  {
+    this.actual = NullCheck.notNull(in_actual);
+  }
+
+  /**
+   * @return A class resolver that can load class data from the current
+   * classpath.
+   */
+
   public static JCClassNameResolverType get()
   {
     final String path =
@@ -40,14 +53,27 @@ public final class JCClassNameResolverClasspath implements
     return JCClassNameResolverClasspath.getWithPath(path);
   }
 
+  /**
+   * @param path The classpath
+   *
+   * @return A class resolver that can load class data from the given classpath
+   * using the default element separator.
+   */
+
   public static JCClassNameResolverType getWithPath(
     final String path)
   {
     NullCheck.notNull(path);
-    final String sep =
-      NullCheck.notNull(System.getProperty("path.separator"));
+    final String sep = NullCheck.notNull(System.getProperty("path.separator"));
     return JCClassNameResolverClasspath.getWithPathAndSeparator(path, sep);
   }
+
+  /**
+   * @param path The classpath
+   * @param sep  The classpath element separator
+   *
+   * @return A class resolver that can load class data from the given classpath.
+   */
 
   public static JCClassNameResolverType getWithPathAndSeparator(
     final String path,
@@ -65,10 +91,9 @@ public final class JCClassNameResolverClasspath implements
   /**
    * Split <tt>path</tt> into elements on <tt>sep</tt>.
    *
-   * @param path
-   *          The path
-   * @param sep
-   *          The separator
+   * @param path The path
+   * @param sep  The separator
+   *
    * @return The URL elements
    */
 
@@ -95,14 +120,6 @@ public final class JCClassNameResolverClasspath implements
       }
     }
     return urls;
-  }
-
-  private final JCClassNameResolverType actual;
-
-  private JCClassNameResolverClasspath(
-    final JCClassNameResolverType in_actual)
-  {
-    this.actual = NullCheck.notNull(in_actual);
   }
 
   @Override public @Nullable byte[] resolveToBytes(

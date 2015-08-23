@@ -24,11 +24,23 @@ public abstract class JCSandboxException extends Exception
 {
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Construct an exception.
+   *
+   * @param message The exception message
+   */
+
   public JCSandboxException(
     final String message)
   {
     super(message);
   }
+
+  /**
+   * Construct an exception.
+   *
+   * @param e The cause
+   */
 
   public JCSandboxException(
     final Throwable e)
