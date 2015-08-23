@@ -38,17 +38,6 @@
 
   <build>
     <plugins>
-      <!-- Require JDK >= 1.6 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-
       <!-- Produce custom manifest in jar files -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -130,7 +119,7 @@
         <executions>
           <execution>
             <id>unpack-sources</id>
-            <phase>generate-sources</phase>
+            <phase>prepare-package</phase>
             <goals>
               <goal>unpack</goal>
             </goals>
