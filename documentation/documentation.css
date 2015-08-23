@@ -58,3 +58,9 @@
   vertical-align: top;
 }
 
+.files table td
+{
+  padding-right: 2.0em;
+  vertical-align: top;
+}
+
