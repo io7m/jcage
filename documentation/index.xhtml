@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>io7m-jcage 1.0.0 Documentation</title><link rel="stylesheet" type="text/css" href="jstructural-2.0.0-layout.css"/><link rel="stylesheet" type="text/css" href="jstructural-2.0.0-colour.css"/><link rel="stylesheet" type="text/css" href="documentation.css"/></head><body><div class="st200_body"><div class="brand">
+  <div class="brand_left">
+    <a href="http://io7m.com/">io7m</a>
+  </div>
+  <div class="brand_right">
+    <a href="http://io7m.github.io/jcage/">io7m-jcage</a> 1.0.0
+  </div>
+</div><div class="st200_document_title">io7m-jcage 1.0.0 Documentation</div><ul class="st200_contents st200_document_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_part"><a href="#st200_p1">1. Package Information</a><ul class="st200_contents st200_part_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p1s1">1.1. Orientation</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p1s2">1.2. Installation</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p1s3">1.3. Platform Specific Issues</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p1s4">1.4. License</a></li></ul></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_part"><a href="#st200_p2">2. Design And Implementation</a><ul class="st200_contents st200_part_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p2s1">2.1. Design And Implementation</a></li></ul></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_part"><a href="#st200_p3">3. Usage</a><ul class="st200_contents st200_part_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p3s1">3.1. Examples</a></li></ul></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_part"><a href="#st200_p4">4. API Reference</a><ul class="st200_contents st200_part_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_section"><a href="#st200_p4s1">4.1. Javadoc</a></li></ul></li></ul><div class="st200_part_container"><div class="st200_part_title_number"><a id="st200_p1" href="#st200_p1">1</a></div><div class="st200_part_title">Package Information</div><ul class="st200_contents st200_part_contents_outer st200_part_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p1s1">1.1. Orientation</a><ul class="st200_contents st200_section_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p1s1ss1">1.1.1. Overview</a></li></ul></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p1s2">1.2. Installation</a><ul class="st200_contents st200_section_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p1s2ss1">1.2.1. Source compilation</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p1s2ss2">1.2.2. Maven</a></li></ul></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p1s3">1.3. Platform Specific Issues</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p1s4">1.4. License</a></li></ul><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p1s1" href="#st200_p1s1">1.1</a></div><div class="st200_section_title">Orientation</div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p1s1ss1" href="#st200_p1s1ss1">1.1.1</a></div><div class="st200_subsection_title">Overview</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s1ss1pg1" href="#st200_p1s1ss1pg1">1</a></div><div class="st200_paragraph">
+          The <span class="st200_term package">io7m-jcage</span> package
+          implements a run-time configurable sandboxing system using the standard
+          JVM security components.
+        </div></div></div></div><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p1s2" href="#st200_p1s2">1.2</a></div><div class="st200_section_title">Installation</div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p1s2ss1" href="#st200_p1s2ss1">1.2.1</a></div><div class="st200_subsection_title">Source compilation</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s2ss1pg1" href="#st200_p1s2ss1pg1">1</a></div><div class="st200_paragraph">
+          The project can be compiled and installed with
+          <a class="st200_link_external" href="http://maven.apache.org">Maven</a>:
+        </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s2ss1pg2" href="#st200_p1s2ss1pg2">2</a></div><div class="st200_paragraph">
+          <pre class="st200_verbatim example">$ mvn -C clean install</pre>
+        </div></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p1s2ss2" href="#st200_p1s2ss2">1.2.2</a></div><div class="st200_subsection_title">Maven</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s2ss2pg1" href="#st200_p1s2ss2pg1">1</a></div><div class="st200_paragraph">
+          Regular releases are made to the
+          <a class="st200_link_external" href="http://search.maven.org/#search%7Cga%7C1%7Cio7m-jcage">Central Repository</a>,
+          so it's possible to use the <span class="st200_term package">io7m-jcage</span>
+          package in your projects with the following Maven dependency:
+        </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s2ss2pg2" href="#st200_p1s2ss2pg2">2</a></div><div class="st200_paragraph">
+          <pre class="st200_verbatim example">&lt;dependency&gt;
+  &lt;groupId&gt;com.io7m.jcage&lt;/groupId&gt;
+  &lt;artifactId&gt;io7m-jcage-core&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+        </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s2ss2pg3" href="#st200_p1s2ss2pg3">3</a></div><div class="st200_paragraph">
+          All <a class="st200_link_external" href="http://io7m.com">io7m.com</a>
+          packages use Semantic Versioning
+          <span class="st200_footnote_reference"><a id="st200_fn_0_ref" href="#st200_fn_0">[0]</a></span>, which implies that it is always safe to use version ranges
+          with an exclusive upper bound equal to the next major version - the API of
+          the package will not change in a backwards-incompatible manner before the
+          next major version.
+        </div></div></div></div><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p1s3" href="#st200_p1s3">1.3</a></div><div class="st200_section_title">Platform Specific Issues</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s3pg1" href="#st200_p1s3pg1">1</a></div><div class="st200_paragraph">
+        There are currently no known platform-specific issues.
+      </div></div></div><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p1s4" href="#st200_p1s4">1.4</a></div><div class="st200_section_title">License</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p1s4pg1" href="#st200_p1s4pg1">1</a></div><div class="st200_paragraph">
+        All files distributed with the <span class="st200_term package">io7m-jcage</span>
+        package are placed under the following license:
+        <pre class="st200_verbatim license">Copyright © 2015 &lt;code@io7m.com&gt; http://io7m.com
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+        </pre>
+      </div></div></div></div><div class="st200_part_container"><div class="st200_part_title_number"><a id="st200_p2" href="#st200_p2">2</a></div><div class="st200_part_title">Design And Implementation</div><ul class="st200_contents st200_part_contents_outer st200_part_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p2s1">2.1. Design And Implementation</a><ul class="st200_contents st200_section_contents"><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss1">2.1.1. JVM Security Model</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss2">2.1.2. JCage Security</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss3">2.1.3. Class Loading</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss4">2.1.4. Privileged Operations</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss5">2.1.5. JCage Insecurity</a></li><li class="st200_contents_item st200_contents_item2 st200_contents_item_subsection"><a href="#st200_p2s1ss6">2.1.6. Types</a></li></ul></li></ul><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p2s1" href="#st200_p2s1">2.1</a></div><div class="st200_section_title">Design And Implementation</div><ul class="st200_contents st200_section_contents_outer st200_section_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss1">2.1.1. JVM Security Model</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss2">2.1.2. JCage Security</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss3">2.1.3. Class Loading</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss4">2.1.4. Privileged Operations</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss5">2.1.5. JCage Insecurity</a></li><li class="st200_contents_item st200_contents_item1 st200_contents_item_subsection"><a href="#st200_p2s1ss6">2.1.6. Types</a></li></ul><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss1" href="#st200_p2s1ss1">2.1.1</a></div><div class="st200_subsection_title">JVM Security Model</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss1pg1" href="#st200_p2s1ss1pg1">1</a></div><div class="st200_paragraph">
+        The Java Virtual Machine (JVM) has a fairly rich security model that
+        can assign sets of permissions to code. All classes loaded by
+        <span class="st200_term term">class loaders</span> in the virtual
+        machine have associated <span class="st200_term term">code sources</span>.
+        A <span class="st200_term term">code source</span>, as represented by
+        the <span class="st200_term type">java.security.CodeSource</span> type,
+        consists of a URL that indicates from where the code was loaded,
+        and zero or more cryptographic <span class="st200_term term">signatures</span>.
+        The JVM associates a set of <span class="st200_term term">Permissions</span>,
+        as represented by subclasses of the
+        <span class="st200_term type">java.security.Permission</span> type,
+        with each <span class="st200_term term">code source</span>. The permissions
+        are assigned by consulting a <span class="st200_term term">policy</span>,
+        as represented by the
+        <span class="st200_term type">java.security.Policy</span> type,
+        when a given class is loaded.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss1pg2" href="#st200_p2s1ss1pg2">2</a></div><div class="st200_paragraph">
+        In order to actually enforce the security policy, any operation
+        that requires privileges must check if that operation is allowed
+        to proceed by asking the current JVM-global
+        <span class="st200_term term">security manager</span>, as represented
+        by the <span class="st200_term type">java.lang.SecurityManager</span>
+        type. The <span class="st200_term type">SecurityManager</span> is actually
+        a historical leftover and nowadays simply delegates all requests
+        to a JVM-global <span class="st200_term term">access controller</span>,
+        as represented
+        by the <span class="st200_term type">java.security.AccessController</span>
+        type. All privileged operations have associated
+        <span class="st200_term type">java.security.Permission</span> values,
+        and the job of the <span class="st200_term term">access controller</span>
+        is simply to determine if a privileged operation that requires
+        permission <span class="st200_term type">P</span> being performed by code
+        from <span class="st200_term term">code source</span>
+        <span class="st200_term type">C</span> is allowed to proceed, given
+        the set of permissions <span class="st200_term type">Q</span> granted
+        to <span class="st200_term type">C</span> by the current security policy.
+        When an operation that requires privileges is attempted, the
+        <span class="st200_term term">access controller</span> walks the
+        call stack and checks that each class on the call stack has
+        the required permissions to perform the operation. If any class
+        does not have the required permissions, a
+        <span class="st200_term type">SecurityException</span> is raised. This
+        provides a strong security guarantee:
+        Assume that a class <span class="st200_term type">C</span> has permission
+        to execute a privileged operation
+        <span class="st200_term variable">O</span>, and a method
+        <span class="st200_term function">m</span> is defined on
+        <span class="st200_term type">C</span> that performs the privileged
+        operation. Assume that a class <span class="st200_term type">D</span>
+        exists that does not have permission to perform
+        <span class="st200_term variable">O</span>. Without the JVM's
+        call-stack-based security checks, if code in
+        <span class="st200_term type">D</span> managed to call
+        <span class="st200_term function">C.m</span>, then it would effectively
+        have been able to perform <span class="st200_term variable">O</span>
+        without actually having permission to do so! However, with the
+        JVM's existing call-stack-based permission checks, the JVM will
+        walk the call stack and notice that <span class="st200_term type">D</span>
+        does not have permission to perform the operation, and raise
+        <span class="st200_term type">SecurityException</span> before the operation
+        can proceed.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss1pg3" href="#st200_p2s1ss1pg3">3</a></div><div class="st200_paragraph">
+        However, it is typically necessary to selectively allow privileged
+        operations to be performed on behalf of unprivileged code. The
+        <span class="st200_term term">access controller</span> provides a standard
+        method named <span class="st200_term function">doPrivileged()</span>
+        that allows exactly this. The details of how this works are
+        given in the
+        <a class="st200_link_external" href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/doprivileged.html">JRE documentation</a>.
+        Informally, extending the example above, if
+        <span class="st200_term function">C.m</span> were to wrap the privileged
+        operation <span class="st200_term variable">O</span> in a call to
+        <span class="st200_term function">doPrivileged()</span>, then
+        <span class="st200_term type">D</span> (or indeed any other class) could
+        call <span class="st200_term function">C.m</span> and have the privileged
+        operation successfully performed on their behalf. However, if
+        <span class="st200_term type">D</span> tried to perform
+        a privileged operation by itself, even if it wrapped the operation
+        in a call to <span class="st200_term function">doPrivileged()</span>,
+        the operation would fail with a
+        <span class="st200_term type">SecurityException</span>. Intuitively,
+        the <span class="st200_term function">doPrivileged()</span> call can be
+        thought of as being able to temporarily grant one's own privileges
+        to peers, but cannot be used to raise one's own level of privilege.
+      </div></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss2" href="#st200_p2s1ss2">2.1.2</a></div><div class="st200_subsection_title">JCage Security</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss2pg1" href="#st200_p2s1ss2pg1">1</a></div><div class="st200_paragraph">
+        Given the above description of the security model, it becomes
+        apparent that all one needs to do to place a piece of code in
+        a restrictive <span class="st200_term term">sandbox</span> is to assign
+        the code a specific <span class="st200_term term">code source</span>
+        and then grant the code source a very limited set of permissions.
+        If the JVM security components are to be trusted, then the code
+        should be sufficiently isolated.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss2pg2" href="#st200_p2s1ss2pg2">2</a></div><div class="st200_paragraph">
+        Unfortunately, although the JVM security components are believed
+        to be reasonably correct, the default implementation of the
+        <span class="st200_term type">java.security.Policy</span> type is entirely
+        limited to loading a static policy from a policy file on JVM startup,
+        and does not allow for any kind of run-time configuration. Additionally,
+        for historical reasons, the default implementation of the
+        <span class="st200_term type">java.lang.SecurityManager</span> type
+        omits a few useful security checks.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss2pg3" href="#st200_p2s1ss2pg3">3</a></div><div class="st200_paragraph">
+        The <span class="st200_term package">io7m-jcage</span>
+        package provides
+        a user-friendly interface to a trivial run-time configurable
+        <span class="st200_term type">java.security.Policy</span> interface.
+        In practical terms, the package places code into user-created
+        <span class="st200_term term">sandboxes</span> by loading all classes
+        inside the sandboxes using a custom
+        <span class="st200_term term">java.lang.ClassLoader</span> implementation
+        that assigns a <span class="st200_term term">code source</span> specific
+        to each sandbox. Each sandbox
+        <span class="st200_term term">code source</span> is given a run-time
+        configurable set of permissions. A custom
+        <span class="st200_term type">java.lang.SecurityManager</span> re-enables
+        the two checks that were historically omitted. Essentially, the
+        entire package is a very thin wrapper around the existing
+        security mechanisms.
+      </div></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss3" href="#st200_p2s1ss3">2.1.3</a></div><div class="st200_subsection_title">Class Loading</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss3pg1" href="#st200_p2s1ss3pg1">1</a></div><div class="st200_paragraph">
+        Astute readers will have noticed that it would be very difficult
+        to communicate with code loaded inside a sandbox if absolutely
+        all of the sandboxed classes were loaded with the sandbox-specific
+        <span class="st200_term term">ClassLoader</span>. The reason for this
+        is that the JVM effectively considers instances of the same
+        class loaded with different class loaders to be
+        <span class="st200_term term">different classes</span>. Therefore, if
+        a user wants to pass a value of class <span class="st200_term term">T</span>
+        to a given sandbox, then the sandbox must have access to the
+        class as loaded by the <span class="st200_term term">host's</span>
+        class loader. The <span class="st200_term package">io7m-jcage</span>
+        package therefore allows sandbox classloaders to delegate loading
+        to another given <span class="st200_term term">ClassLoader</span> according
+        to a user-defined policy. For example, it is possible to define
+        a policy that loads all classes using the sandbox
+        <span class="st200_term term">ClassLoader</span> except for
+        <span class="st200_term term">T</span>, which is delegated to the
+        user-provided <span class="st200_term term">ClassLoader</span>. This
+        allows the host and sandbox to share the same loaded version of
+        <span class="st200_term term">T</span>.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss3pg2" href="#st200_p2s1ss3pg2">2</a></div><div class="st200_paragraph">
+        To facilitate this, each sandbox has a reference to a
+        <span class="st200_term term">host classloader</span>
+        <span class="st200_term variable">HCL</span>, a
+        <span class="st200_term term">host classloader policy</span>
+        <span class="st200_term variable">HCP</span>, a
+        <span class="st200_term term">sandbox class resolver</span>
+        <span class="st200_term variable">SCR</span>, and
+        a <span class="st200_term term">sandbox classloader policy</span>
+        <span class="st200_term variable">SCP</span>.
+        A private <span class="st200_term term">sandbox classloader</span>
+        <span class="st200_term variable">SC</span>
+        is created for the sandbox when the sandbox is created.
+        When the sandbox needs to load a class
+        <span class="st200_term variable">T</span>, it consults
+        <span class="st200_term variable">SCP</span> to
+        determine whether or not it is allowed to try to use
+        <span class="st200_term variable">SC</span> to
+        load <span class="st200_term variable">T</span>. If it is allowed, then the
+        <span class="st200_term variable">SCR</span> resolves
+        <span class="st200_term variable">T</span> and loads it using
+        <span class="st200_term variable">SC</span>. The loading operation
+        assigns <span class="st200_term variable">T</span> a sandbox-specific
+        <span class="st200_term term">code source</span> and the class instance
+        is distinct from any other loaded instances of the
+        <span class="st200_term variable">T</span> class in the JVM.
+        However, if the <span class="st200_term variable">SCP</span> indicates
+        that the sandbox is not allowed to load the class directly, then
+        it attempts to delegate the operation to
+        <span class="st200_term variable">HCL</span>. The
+        <span class="st200_term variable">HCP</span> is consulted to see if
+        <span class="st200_term variable">HCL</span> is allowed to load the
+        class. If it is allowed, the class is loaded. If it is not allowed,
+        a <span class="st200_term type">SecurityException</span> is raised.
+      </div></div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss3pg3" href="#st200_p2s1ss3pg3">3</a></div><div class="st200_paragraph">
+        The end result of this procedure is that it is possible to
+        arrange for the host and a sandbox to share the same instances
+        of one or more loaded classes. Note that this is not a
+        security-critical decision: Even if the sandboxed code obtains
+        a reference to a class that can perform dangerous or privileged
+        operations, the JVM's call-stack-based security checks ensure
+        that the sandboxed code does not gain permissions simply by having
+        access to a class. The class loader policies simply exist to
+        organize class sharing between the host and a sandbox - not to
+        control privileged operations.
+      </div></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss4" href="#st200_p2s1ss4">2.1.4</a></div><div class="st200_subsection_title">Privileged Operations</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss4pg1" href="#st200_p2s1ss4pg1">1</a></div><div class="st200_paragraph">
+        It is sometimes desirable for sandboxed code to
+        be temporarily granted privileges. For example, it could be desirable
+        to forbid all filesystem access to sandboxed code, and then provide
+        an API to the sandboxed code that provides an extremely limited
+        set of privileged I/O operations. As described
+        <a class="st200_link" href="#st200_p2s1ss1pg3">earlier</a>,
+        the JVM provides a standard mechanism for this:
+        <span class="st200_term type">java.security.AccessController.doPrivileged()</span>.
+        The <a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_1/SandboxerMain.java">sandboxed_1/SandboxerMain</a>
+        examples shows how this is used. The
+        <span class="st200_term type">SandboxListenerType</span> is
+        loaded on the host (it is automatically loaded by the system
+        classloader simply due to being referenced by the
+        <span class="st200_term type">SandboxerMain</span> type). The
+        sandboxed code is given access to the
+        <span class="st200_term type">SandboxListenerType</span> by the
+        <a class="st200_link" href="#st200_p2s1ss3">class loading policy</a>.
+        The <span class="st200_term function">onMessageReceived</span> method
+        performs a privileged operation that the sandboxed
+        <a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_1/Sandboxed.java">sandboxed_1/Sandboxed</a>
+        class would not otherwise be able to perform by itself, even if
+        it attempted to call
+        <span class="st200_term type">AccessController.doPrivileged()</span>
+        itself. The <span class="st200_term type">Sandboxed</span> code also
+        attempts to raise its own privileges and the JVM can be seen to
+        block this operation.
+      </div></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss5" href="#st200_p2s1ss5">2.1.5</a></div><div class="st200_subsection_title">JCage Insecurity</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss5pg1" href="#st200_p2s1ss5pg1">1</a></div><div class="st200_paragraph">
+        The <span class="st200_term package">io7m-jcage</span> package
+        does not protect against anything that the default JVM security
+        model does not protect against. Specifically:
+      </div></div><div class="st200_formal_item"><div class="st200_formal_item_title"><a id="st200_p2s1ss5fo1" href="#st200_p2s1ss5fo1">2.1.5.1. Insecurity</a></div><ul class="st200_list_unordered"><li class="st200_list_item">
+            There is no protection against sandboxed code consuming vast
+            quantities of CPU time and slowing the rest of the system down.
+            This can be mitigated to some extent by running code in a
+            separate thread and using a <span class="st200_term term">watchdog</span>
+            to detect runaway threads. This is considered to be outside of
+            the scope of <span class="st200_term package">io7m-jcage</span>.
+          </li><li class="st200_list_item">
+            There is no protection against sandboxed code consuming vast
+            quantities of heap space. The JVM currently has no means to
+            protect against this whatsoever.
+          </li></ul></div></div><div class="st200_subsection_container"><div class="st200_subsection_title_number"><a id="st200_p2s1ss6" href="#st200_p2s1ss6">2.1.6</a></div><div class="st200_subsection_title">Types</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p2s1ss6pg1" href="#st200_p2s1ss6pg1">1</a></div><div class="st200_paragraph">
+        The <span class="st200_term package">io7m-jcage</span>
+        implementation consists of the following basic classes:
+      </div></div><div class="st200_formal_item"><div class="st200_formal_item_title"><a id="st200_p2s1ss6fo1" href="#st200_p2s1ss6fo1">2.1.6.1. Types</a></div><table class="st200_table" summary="Types"><thead class="st200_table_head"><tr><th class="st200_table_column_name">Type</th><th class="st200_table_column_name">Purpose</th></tr></thead><tbody class="st200_table_body"><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/core/JCClassLoader.java">JCClassLoader.java</a></td><td class="st200_table_cell">Loads classes and assigns sandbox-specific code sources.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/core/JCClassLoaderPolicyType.java">JCClassLoaderPolicyType.java</a></td><td class="st200_table_cell">The implementation exposed by class loader policies, for selectively delegating classloading.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/core/JCPolicy.java">JCPolicy.java</a></td><td class="st200_table_cell">A run-time configurable implementation of the standard Policy type.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/core/JCSecurityManager.java">JCSecurityManager.java</a></td><td class="st200_table_cell">A security manager implementation that re-enables the historically omitted checks</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/core/JCSandboxes.java">JCSandboxes.java</a></td><td class="st200_table_cell">The default implementation of the user-visible sandbox creation interface</td></tr></tbody></table></div></div></div></div><div class="st200_part_container"><div class="st200_part_title_number"><a id="st200_p3" href="#st200_p3">3</a></div><div class="st200_part_title">Usage</div><ul class="st200_contents st200_part_contents_outer st200_part_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p3s1">3.1. Examples</a></li></ul><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p3s1" href="#st200_p3s1">3.1</a></div><div class="st200_section_title">Examples</div><div class="st200_formal_item examples"><div class="st200_formal_item_title examples"><a id="st200_p3s1fo1" href="#st200_p3s1fo1">3.1.1. Examples</a></div><table class="st200_table" summary="Examples"><thead class="st200_table_head"><tr><th class="st200_table_column_name">Name</th><th class="st200_table_column_name">Description</th></tr></thead><tbody class="st200_table_body"><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_0/Sandboxed.java">sandboxed_0/Sandboxed.java</a></td><td class="st200_table_cell">A sandboxed class that demonstrates an inability to performed privileged operations.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_0/SandboxerMain.java">sandboxed_0/SandboxerMain.java</a></td><td class="st200_table_cell">The creation of a sandbox.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_1/Sandboxed.java">sandboxed_1/Sandboxed.java</a></td><td class="st200_table_cell">A sandboxed class that demonstrates an inability to performed privileged operations, but can call a host-provided API to perform privileged operations.</td></tr><tr class="st200_table_row"><td class="st200_table_cell"><a class="st200_link_external" href="com/io7m/jcage/examples/sandboxed_1/SandboxerMain.java">sandboxed_1/SandboxerMain.java</a></td><td class="st200_table_cell">The creation of a sandbox that allows selective privileged operations.</td></tr></tbody></table></div></div></div><div class="st200_part_container"><div class="st200_part_title_number"><a id="st200_p4" href="#st200_p4">4</a></div><div class="st200_part_title">API Reference</div><ul class="st200_contents st200_part_contents_outer st200_part_contents"><li class="st200_contents_item st200_contents_item1 st200_contents_item_section"><a href="#st200_p4s1">4.1. Javadoc</a></li></ul><div class="st200_section_container"><div class="st200_section_title_number"><a id="st200_p4s1" href="#st200_p4s1">4.1</a></div><div class="st200_section_title">Javadoc</div><div class="st200_paragraph_container"><div class="st200_paragraph_number"><a id="st200_p4s1pg1" href="#st200_p4s1pg1">1</a></div><div class="st200_paragraph">
+        API documentation for the package is provided via the
+        included <a class="st200_link_external" href="apidocs">Javadoc</a>.
+      </div></div></div></div><div class="st200_footnotes"><hr/><div class="st200_footnote_container"><div class="st200_footnote_number">[<a id="st200_fn_0" href="#st200_fn_0_ref">0</a>]</div><div class="st200_footnote_body">
+            <a class="st200_link_external" href="http://semver.org">http://semver.org</a>
+          </div></div></div></div></body></html>

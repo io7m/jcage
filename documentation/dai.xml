@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright © 2015 <code@io7m.com> http://io7m.com
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted, provided that the above
+  copyright notice and this permission notice appear in all copies.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+  -->
+
+<s:part
+  xmlns:s="http://schemas.io7m.com/structural/2.1.0"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <s:part-title>Design And Implementation</s:part-title>
+  <s:part-contents/>
+
+  <s:section xml:id="dai">
+    <s:section-title>Design And Implementation</s:section-title>
+    <s:section-contents/>
+    <s:subsection xml:id="dai.jvm_security">
+      <s:subsection-title>JVM Security Model</s:subsection-title>
+      <s:paragraph>
+        The Java Virtual Machine (JVM) has a fairly rich security model that
+        can assign sets of permissions to code. All classes loaded by
+        <s:term s:type="term">class loaders</s:term> in the virtual
+        machine have associated <s:term s:type="term">code sources</s:term>.
+        A <s:term s:type="term">code source</s:term>, as represented by
+        the <s:term s:type="type">java.security.CodeSource</s:term> type,
+        consists of a URL that indicates from where the code was loaded,
+        and zero or more cryptographic <s:term s:type="term">signatures</s:term>.
+        The JVM associates a set of <s:term s:type="term">Permissions</s:term>,
+        as represented by subclasses of the
+        <s:term s:type="type">java.security.Permission</s:term> type,
+        with each <s:term s:type="term">code source</s:term>. The permissions
+        are assigned by consulting a <s:term s:type="term">policy</s:term>,
+        as represented by the
+        <s:term s:type="type">java.security.Policy</s:term> type,
+        when a given class is loaded.
+      </s:paragraph>
+      <s:paragraph>
+        In order to actually enforce the security policy, any operation
+        that requires privileges must check if that operation is allowed
+        to proceed by asking the current JVM-global
+        <s:term s:type="term">security manager</s:term>, as represented
+        by the <s:term s:type="type">java.lang.SecurityManager</s:term>
+        type. The <s:term s:type="type">SecurityManager</s:term> is actually
+        a historical leftover and nowadays simply delegates all requests
+        to a JVM-global <s:term s:type="term">access controller</s:term>,
+        as represented
+        by the <s:term s:type="type">java.security.AccessController</s:term>
+        type. All privileged operations have associated
+        <s:term s:type="type">java.security.Permission</s:term> values,
+        and the job of the <s:term s:type="term">access controller</s:term>
+        is simply to determine if a privileged operation that requires
+        permission <s:term s:type="type">P</s:term> being performed by code
+        from <s:term s:type="term">code source</s:term>
+        <s:term s:type="type">C</s:term> is allowed to proceed, given
+        the set of permissions <s:term s:type="type">Q</s:term> granted
+        to <s:term s:type="type">C</s:term> by the current security policy.
+        When an operation that requires privileges is attempted, the
+        <s:term s:type="term ">access controller</s:term> walks the
+        call stack and checks that each class on the call stack has
+        the required permissions to perform the operation. If any class
+        does not have the required permissions, a
+        <s:term s:type="type">SecurityException</s:term> is raised. This
+        provides a strong security guarantee:
+        Assume that a class <s:term s:type="type">C</s:term> has permission
+        to execute a privileged operation
+        <s:term s:type="variable">O</s:term>, and a method
+        <s:term s:type="function">m</s:term> is defined on
+        <s:term s:type="type">C</s:term> that performs the privileged
+        operation. Assume that a class <s:term s:type="type">D</s:term>
+        exists that does not have permission to perform
+        <s:term s:type="variable">O</s:term>. Without the JVM's
+        call-stack-based security checks, if code in
+        <s:term s:type="type">D</s:term> managed to call
+        <s:term s:type="function">C.m</s:term>, then it would effectively
+        have been able to perform <s:term s:type="variable">O</s:term>
+        without actually having permission to do so! However, with the
+        JVM's existing call-stack-based permission checks, the JVM will
+        walk the call stack and notice that <s:term s:type="type">D</s:term>
+        does not have permission to perform the operation, and raise
+        <s:term s:type="type">SecurityException</s:term> before the operation
+        can proceed.
+      </s:paragraph>
+      <s:paragraph xml:id="dai.jvm_security.do_privileged">
+        However, it is typically necessary to selectively allow privileged
+        operations to be performed on behalf of unprivileged code. The
+        <s:term s:type="term ">access controller</s:term> provides a standard
+        method named <s:term s:type="function">doPrivileged()</s:term>
+        that allows exactly this. The details of how this works are
+        given in the
+        <s:link-external s:target="http://docs.oracle.com/javase/7/docs/technotes/guides/security/doprivileged.html">JRE documentation</s:link-external>.
+        Informally, extending the example above, if
+        <s:term s:type="function">C.m</s:term> were to wrap the privileged
+        operation <s:term s:type="variable">O</s:term> in a call to
+        <s:term s:type="function">doPrivileged()</s:term>, then
+        <s:term s:type="type">D</s:term> (or indeed any other class) could
+        call <s:term s:type="function">C.m</s:term> and have the privileged
+        operation successfully performed on their behalf. However, if
+        <s:term s:type="type">D</s:term> tried to perform
+        a privileged operation by itself, even if it wrapped the operation
+        in a call to <s:term s:type="function">doPrivileged()</s:term>,
+        the operation would fail with a
+        <s:term s:type="type">SecurityException</s:term>. Intuitively,
+        the <s:term s:type="function">doPrivileged()</s:term> call can be
+        thought of as being able to temporarily grant one's own privileges
+        to peers, but cannot be used to raise one's own level of privilege.
+      </s:paragraph>
+    </s:subsection>
+
+    <s:subsection xml:id="dai.jcage_security">
+      <s:subsection-title>JCage Security</s:subsection-title>
+      <s:paragraph>
+        Given the above description of the security model, it becomes
+        apparent that all one needs to do to place a piece of code in
+        a restrictive <s:term s:type="term">sandbox</s:term> is to assign
+        the code a specific <s:term s:type="term">code source</s:term>
+        and then grant the code source a very limited set of permissions.
+        If the JVM security components are to be trusted, then the code
+        should be sufficiently isolated.
+      </s:paragraph>
+      <s:paragraph>
+        Unfortunately, although the JVM security components are believed
+        to be reasonably correct, the default implementation of the
+        <s:term s:type="type">java.security.Policy</s:term> type is entirely
+        limited to loading a static policy from a policy file on JVM startup,
+        and does not allow for any kind of run-time configuration. Additionally,
+        for historical reasons, the default implementation of the
+        <s:term s:type="type">java.lang.SecurityManager</s:term> type
+        omits a few useful security checks.
+      </s:paragraph>
+      <s:paragraph>
+        The <s:term s:type="package">io7m-jcage</s:term>
+        package provides
+        a user-friendly interface to a trivial run-time configurable
+        <s:term s:type="type">java.security.Policy</s:term> interface.
+        In practical terms, the package places code into user-created
+        <s:term s:type="term">sandboxes</s:term> by loading all classes
+        inside the sandboxes using a custom
+        <s:term s:type="term">java.lang.ClassLoader</s:term> implementation
+        that assigns a <s:term s:type="term">code source</s:term> specific
+        to each sandbox. Each sandbox
+        <s:term s:type="term">code source</s:term> is given a run-time
+        configurable set of permissions. A custom
+        <s:term s:type="type">java.lang.SecurityManager</s:term> re-enables
+        the two checks that were historically omitted. Essentially, the
+        entire package is a very thin wrapper around the existing
+        security mechanisms.
+      </s:paragraph>
+    </s:subsection>
+
+    <s:subsection xml:id="dai.class_loading">
+      <s:subsection-title>Class Loading</s:subsection-title>
+      <s:paragraph>
+        Astute readers will have noticed that it would be very difficult
+        to communicate with code loaded inside a sandbox if absolutely
+        all of the sandboxed classes were loaded with the sandbox-specific
+        <s:term s:type="term">ClassLoader</s:term>. The reason for this
+        is that the JVM effectively considers instances of the same
+        class loaded with different class loaders to be
+        <s:term s:type="term">different classes</s:term>. Therefore, if
+        a user wants to pass a value of class <s:term s:type="term">T</s:term>
+        to a given sandbox, then the sandbox must have access to the
+        class as loaded by the <s:term s:type="term">host's</s:term>
+        class loader. The <s:term s:type="package">io7m-jcage</s:term>
+        package therefore allows sandbox classloaders to delegate loading
+        to another given <s:term s:type="term">ClassLoader</s:term> according
+        to a user-defined policy. For example, it is possible to define
+        a policy that loads all classes using the sandbox
+        <s:term s:type="term">ClassLoader</s:term> except for
+        <s:term s:type="term">T</s:term>, which is delegated to the
+        user-provided <s:term s:type="term">ClassLoader</s:term>. This
+        allows the host and sandbox to share the same loaded version of
+        <s:term s:type="term">T</s:term>.
+      </s:paragraph>
+      <s:paragraph>
+        To facilitate this, each sandbox has a reference to a
+        <s:term s:type="term">host classloader</s:term>
+        <s:term s:type="variable">HCL</s:term>, a
+        <s:term s:type="term">host classloader policy</s:term>
+        <s:term s:type="variable">HCP</s:term>, a
+        <s:term s:type="term">sandbox class resolver</s:term>
+        <s:term s:type="variable">SCR</s:term>, and
+        a <s:term s:type="term">sandbox classloader policy</s:term>
+        <s:term s:type="variable">SCP</s:term>.
+        A private <s:term s:type="term">sandbox classloader</s:term>
+        <s:term s:type="variable">SC</s:term>
+        is created for the sandbox when the sandbox is created.
+        When the sandbox needs to load a class
+        <s:term s:type="variable">T</s:term>, it consults
+        <s:term s:type="variable">SCP</s:term> to
+        determine whether or not it is allowed to try to use
+        <s:term s:type="variable">SC</s:term> to
+        load <s:term s:type="variable">T</s:term>. If it is allowed, then the
+        <s:term s:type="variable">SCR</s:term> resolves
+        <s:term s:type="variable">T</s:term> and loads it using
+        <s:term s:type="variable">SC</s:term>. The loading operation
+        assigns <s:term s:type="variable">T</s:term> a sandbox-specific
+        <s:term s:type="term">code source</s:term> and the class instance
+        is distinct from any other loaded instances of the
+        <s:term s:type="variable">T</s:term> class in the JVM.
+        However, if the <s:term s:type="variable">SCP</s:term> indicates
+        that the sandbox is not allowed to load the class directly, then
+        it attempts to delegate the operation to
+        <s:term s:type="variable">HCL</s:term>. The
+        <s:term s:type="variable">HCP</s:term> is consulted to see if
+        <s:term s:type="variable">HCL</s:term> is allowed to load the
+        class. If it is allowed, the class is loaded. If it is not allowed,
+        a <s:term s:type="type">SecurityException</s:term> is raised.
+      </s:paragraph>
+      <s:paragraph>
+        The end result of this procedure is that it is possible to
+        arrange for the host and a sandbox to share the same instances
+        of one or more loaded classes. Note that this is not a
+        security-critical decision: Even if the sandboxed code obtains
+        a reference to a class that can perform dangerous or privileged
+        operations, the JVM's call-stack-based security checks ensure
+        that the sandboxed code does not gain permissions simply by having
+        access to a class. The class loader policies simply exist to
+        organize class sharing between the host and a sandbox - not to
+        control privileged operations.
+      </s:paragraph>
+    </s:subsection>
+
+    <s:subsection xml:id="dai.priv_ops">
+      <s:subsection-title>Privileged Operations</s:subsection-title>
+      <s:paragraph>
+        It is sometimes desirable for sandboxed code to
+        be temporarily granted privileges. For example, it could be desirable
+        to forbid all filesystem access to sandboxed code, and then provide
+        an API to the sandboxed code that provides an extremely limited
+        set of privileged I/O operations. As described
+        <s:link s:target="dai.jvm_security.do_privileged">earlier</s:link>,
+        the JVM provides a standard mechanism for this:
+        <s:term s:type="type">java.security.AccessController.doPrivileged()</s:term>.
+        The <s:link-external s:target="com/io7m/jcage/examples/sandboxed_1/SandboxerMain.java">sandboxed_1/SandboxerMain</s:link-external>
+        examples shows how this is used. The
+        <s:term s:type="type">SandboxListenerType</s:term> is
+        loaded on the host (it is automatically loaded by the system
+        classloader simply due to being referenced by the
+        <s:term s:type="type">SandboxerMain</s:term> type). The
+        sandboxed code is given access to the
+        <s:term s:type="type">SandboxListenerType</s:term> by the
+        <s:link s:target="dai.class_loading">class loading policy</s:link>.
+        The <s:term s:type="function">onMessageReceived</s:term> method
+        performs a privileged operation that the sandboxed
+        <s:link-external s:target="com/io7m/jcage/examples/sandboxed_1/Sandboxed.java">sandboxed_1/Sandboxed</s:link-external>
+        class would not otherwise be able to perform by itself, even if
+        it attempted to call
+        <s:term s:type="type">AccessController.doPrivileged()</s:term>
+        itself. The <s:term s:type="type">Sandboxed</s:term> code also
+        attempts to raise its own privileges and the JVM can be seen to
+        block this operation.
+      </s:paragraph>
+    </s:subsection>
+
+    <s:subsection>
+      <s:subsection-title>JCage Insecurity</s:subsection-title>
+      <s:paragraph>
+        The <s:term s:type="package">io7m-jcage</s:term> package
+        does not protect against anything that the default JVM security
+        model does not protect against. Specifically:
+      </s:paragraph>
+      <s:formal-item s:kind="specifications">
+        <s:formal-item-title>Insecurity</s:formal-item-title>
+        <s:list-unordered>
+          <s:list-item>
+            There is no protection against sandboxed code consuming vast
+            quantities of CPU time and slowing the rest of the system down.
+            This can be mitigated to some extent by running code in a
+            separate thread and using a <s:term s:type="term">watchdog</s:term>
+            to detect runaway threads. This is considered to be outside of
+            the scope of <s:term s:type="package">io7m-jcage</s:term>.
+          </s:list-item>
+          <s:list-item>
+            There is no protection against sandboxed code consuming vast
+            quantities of heap space. The JVM currently has no means to
+            protect against this whatsoever.
+          </s:list-item>
+        </s:list-unordered>
+      </s:formal-item>
+    </s:subsection>
+
+    <s:subsection>
+      <s:subsection-title>Types</s:subsection-title>
+      <s:paragraph>
+        The <s:term s:type="package">io7m-jcage</s:term>
+        implementation consists of the following basic classes:
+      </s:paragraph>
+      <s:formal-item s:kind="files">
+        <s:formal-item-title>Types</s:formal-item-title>
+        <s:table>
+          <s:table-summary>Types</s:table-summary>
+          <s:table-head>
+            <s:table-column-name>Type</s:table-column-name>
+            <s:table-column-name>Purpose</s:table-column-name>
+          </s:table-head>
+          <s:table-body>
+            <s:table-row>
+              <s:table-cell><s:link-external s:target="com/io7m/jcage/core/JCClassLoader.java">JCClassLoader.java</s:link-external></s:table-cell>
+              <s:table-cell>Loads classes and assigns sandbox-specific code sources.</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell><s:link-external s:target="com/io7m/jcage/core/JCClassLoaderPolicyType.java">JCClassLoaderPolicyType.java</s:link-external></s:table-cell>
+              <s:table-cell>The implementation exposed by class loader policies, for selectively delegating classloading.</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell><s:link-external s:target="com/io7m/jcage/core/JCPolicy.java">JCPolicy.java</s:link-external></s:table-cell>
+              <s:table-cell>A run-time configurable implementation of the standard Policy type.</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell><s:link-external s:target="com/io7m/jcage/core/JCSecurityManager.java">JCSecurityManager.java</s:link-external></s:table-cell>
+              <s:table-cell>A security manager implementation that re-enables the historically omitted checks</s:table-cell>
+            </s:table-row>
+            <s:table-row>
+              <s:table-cell><s:link-external s:target="com/io7m/jcage/core/JCSandboxes.java">JCSandboxes.java</s:link-external></s:table-cell>
+              <s:table-cell>The default implementation of the user-visible sandbox creation interface</s:table-cell>
+            </s:table-row>
+          </s:table-body>
+        </s:table>
+      </s:formal-item>
+    </s:subsection>
+
+  </s:section>
+</s:part>
