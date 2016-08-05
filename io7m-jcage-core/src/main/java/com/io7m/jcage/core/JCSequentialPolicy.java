@@ -59,14 +59,14 @@ import java.util.regex.Pattern;
     private final JCRuleConclusion resource_default;
     private final List<Rule>       resource_rules;
 
-    public Builder(
+    Builder(
       final JCRuleConclusion in_class_default,
       final JCRuleConclusion in_resource_default)
     {
       this.class_default = NullCheck.notNull(in_class_default);
       this.resource_default = NullCheck.notNull(in_resource_default);
-      this.class_rules = new ArrayList<JCSequentialPolicy.Rule>();
-      this.resource_rules = new ArrayList<JCSequentialPolicy.Rule>();
+      this.class_rules = new ArrayList<>();
+      this.resource_rules = new ArrayList<>();
     }
 
     @Override public void addClassRule(

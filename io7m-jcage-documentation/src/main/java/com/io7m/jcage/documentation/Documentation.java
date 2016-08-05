@@ -1,5 +1,5 @@
 /*
- * Copyright © 2014 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 <code@io7m.com> http://io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,36 +16,15 @@
 
 package com.io7m.jcage.documentation;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-
 /**
- * Functions for retrieving the documentation.
+ * Marker class for looking up files by resource.
  */
 
 public final class Documentation
 {
   private Documentation()
   {
-    throw new AssertionError("Unreachable code!");
-  }
-
-  /**
-   * @return The resource URL of the documentation
-   */
-
-  public static URI getDocumentationXMLLocation()
-  {
-    try {
-      final URL url = Documentation.class.getResource(
-        "/com/io7m/jcage/documentation/documentation.xml");
-      assert url != null;
-      final URI uri = url.toURI();
-      assert uri != null;
-      return uri;
-    } catch (final URISyntaxException e) {
-      throw new AssertionError(e);
-    }
+    throw new AssertionError("Unreachable code");
   }
 }
+

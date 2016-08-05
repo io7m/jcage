@@ -3,10 +3,10 @@
   <c:project>io7m-jcage</c:project>
 
   <c:release c:ticket-system="com.github.io7m.jcage">
-    <c:date>2015-08-22</c:date>
-    <c:version>1.0.0</c:version>
+    <c:date>2016-08-05</c:date>
+    <c:version>0.1.0</c:version>
     <c:item>
-      <c:date>2015-08-22</c:date>
+      <c:date>2016-08-05</c:date>
       <c:type-code-new/>
       <c:summary>Initial release.</c:summary>
     </c:item>

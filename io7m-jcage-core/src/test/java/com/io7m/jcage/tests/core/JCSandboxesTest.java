@@ -21,7 +21,7 @@ import java.security.Permissions;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.valid4j.exceptions.RequireViolation;
+import org.valid4j.errors.RequireViolation;
 
 import com.io7m.jcage.core.JCClassLoader;
 import com.io7m.jcage.core.JCClassLoaderPolicyType;

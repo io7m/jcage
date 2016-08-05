@@ -29,6 +29,7 @@ import java.security.Permissions;
 import java.security.Policy;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The default implementation of the {@link JCSandboxesType} interface.
@@ -73,7 +74,7 @@ public final class JCSandboxes implements JCSandboxesType
   private static void installSecurityManagerAndPolicy()
   {
     final Policy p = Policy.getPolicy();
-    if ((p instanceof JCPolicy) == false) {
+    if (!(p instanceof JCPolicy)) {
       JCSandboxes.LOG.debug("installing policy");
       Policy.setPolicy(JCSandboxes.POLICY);
     }
@@ -155,7 +156,7 @@ public final class JCSandboxes implements JCSandboxesType
     private final URI                     uri;
     private final URL                     url;
 
-    public Sandbox(
+    Sandbox(
       final String in_name,
       final ClassLoader in_sandbox_host_classloader,
       final JCClassLoaderPolicyType in_sandbox_host_class_policy,
@@ -198,7 +199,7 @@ public final class JCSandboxes implements JCSandboxesType
         final Class<?> c = this.class_loader.loadClass(class_name);
 
         final ClassLoader loader = c.getClassLoader();
-        if (loader != this.class_loader) {
+        if (!Objects.equals(loader, this.class_loader)) {
           final StringBuilder sb = new StringBuilder();
           sb.append("Expected a class loaded by the sandbox loader.\n");
           sb.append("  Class:    ");

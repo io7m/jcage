@@ -185,9 +185,8 @@
     <module name="ParenPad"/>
     <module name="RedundantImport"/>
     <module name="RedundantModifier"/>
-    <!--<module name="RedundantThrows"/>-->
     <module name="RequireThis"/>
-    <!--<module name="SimplifyBooleanExpression"/>-->
+    <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="StaticVariableName">
       <property name="format" value="^[A-Z][_A-Z0-9]*$"/>

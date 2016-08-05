@@ -1,5 +1,5 @@
-io7m-jcage
-==========
+jcage
+===
 
 [![Build Status](https://travis-ci.org/io7m/jcage.svg?branch=master)](https://travis-ci.org/io7m/jcage)
 

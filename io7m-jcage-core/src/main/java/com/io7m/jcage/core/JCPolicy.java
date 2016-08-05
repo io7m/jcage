@@ -41,7 +41,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class JCPolicy extends Policy
 {
   private final Map<URL, Permissions> sandboxes;
-  private       Permissions           permissions_default;
+  private Permissions permissions_default;
 
   JCPolicy()
   {
@@ -52,39 +52,52 @@ public final class JCPolicy extends Policy
     this.permissions_default = q;
   }
 
-  @Override public @Nullable Provider getProvider()
+  @Override
+  public
+  @Nullable
+  Provider getProvider()
   {
     return null;
   }
 
-  @Override public void refresh()
+  @Override
+  public void refresh()
   {
     // Nothing
   }
 
-  @Override public PermissionCollection getPermissions(
+  @Override
+  public PermissionCollection getPermissions(
     final @Nullable CodeSource codesource)
   {
     throw new UnsupportedOperationException();
   }
 
-  @Override public PermissionCollection getPermissions(
+  @Override
+  public PermissionCollection getPermissions(
     final @Nullable ProtectionDomain domain)
   {
     throw new UnsupportedOperationException();
   }
 
-  @Override public @Nullable String getType()
+  @Override
+  public
+  @Nullable
+  String getType()
   {
     return null;
   }
 
-  @Override public @Nullable Parameters getParameters()
+  @Override
+  public
+  @Nullable
+  Parameters getParameters()
   {
     return null;
   }
 
-  @Override public boolean implies(
+  @Override
+  public boolean implies(
     final @Nullable ProtectionDomain in_domain,
     final @Nullable Permission in_permission)
   {
@@ -149,7 +162,7 @@ public final class JCPolicy extends Policy
     }
 
     Assertive.require(
-      this.sandboxes.containsKey(name) == false,
+      !this.sandboxes.containsKey(name),
       "Sandbox does not already exist with URL '%s'",
       name);
 
