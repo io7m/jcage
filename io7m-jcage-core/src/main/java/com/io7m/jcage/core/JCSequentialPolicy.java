@@ -115,7 +115,7 @@ import java.util.regex.Pattern;
       this.conclusion = NullCheck.notNull(in_conclusion);
     }
 
-    boolean matches(
+    private boolean matches(
       final String name)
     {
       final Matcher m = this.pattern.matcher(name);
