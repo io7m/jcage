@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.io7m.jcage</groupId>
@@ -57,9 +53,9 @@
 
   <distributionManagement>
     <site>
-      <id>GitHub</id>
-      <name>GitHub</name>
-      <url>http://io7m.github.io/jcage</url>
+      <id>io7m.com</id>
+      <name>io7m.com</name>
+      <url>https://www.io7m.com/software/jcage</url>
     </site>
     <repository>
       <id>sonatype-nexus-staging</id>
@@ -386,7 +382,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <bottom><![CDATA[Copyright &#169; {currentYear} &lt;code@io7m.com&gt; http://io7m.com]]></bottom>
+              <bottom>Copyright &amp;#169; {currentYear} &amp;lt;code@io7m.com&amp;gt; http://io7m.com</bottom>
               <archive>
                 <manifestEntries>
                   <Specification-Title>${project.name}</Specification-Title>
